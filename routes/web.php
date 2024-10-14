@@ -1,21 +1,17 @@
 <?php
 
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-//Route::get('/blogs', function () {
-//    return view('blogs');
-//})->name('all.blogs');
-//
-
-Route::get('/blogs', [BlogsController::class, 'index'])->name('all.blogs');
+Route::get('/', [HomePageController::class, 'index'])->name('homepage');
+Route::get('/all-blogs', [BlogsController::class, 'index'])->name('all.blogs');
+Route::get('/all-blogs/{id?}', [BlogsController::class, 'singleBlog'])->name('single.blog');
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.us');
 
 
 Route::get('/dashboard', function () {
