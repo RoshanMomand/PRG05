@@ -9,13 +9,7 @@ class FormController extends Controller
 {
     public function formRequest(Request $request)
     {
-        $formFields = $request->validate([
-            'title' => ['required', 'min:3', 'max:20'],
-            'description' => ['required', 'min:20', 'max:300']
-        ]);
 
-        Blog::create($formFields);
-        return "Thanks for your form request";
     }
 
 }

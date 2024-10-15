@@ -30,7 +30,19 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image_link' => 'required',
+            'status' => 'required'
+        ]);
+        $formFields['title'] = strip_tags($formFields['title']);
+        $formFields['description'] = strip_tags($formFields['description']);
+        $formFields['image_link'] = strip_tags($formFields['image_link']);
+        $formFields['status'] = strip_tags($formFields['status']);
+
+        Blog::create($formFields);
+        return redirect('/blogposts');
     }
 
     /**

@@ -61,6 +61,17 @@ In plaats van meerdere Routes te hebben wordt het gecombineerd tot 1 geheel en h
 ## 15-10-2024
 
 * HTML Form gehardcoded
+* Create / Store functionaliteit toegevoegd aan de pagina
+* Crud Tutorial gekeken over het maken en opslaan van gegevens naar de database
+
+<img alt="ERD-Basis tabellen"  src="/documentatie/create-form.png" height="400" width="1000"/>
+<img alt="ERD-Basis tabellen"  src="/documentatie/Beveiliging-validate.png" height="300" width="500"/>
+
+#### Opmerkingen:
+
+CSRF is verplicht bij een form. Dit zorgt voor een beveiliging voor bepaalde injecties<br>
+Denk aan verwijderen of wijzigen van de database. Toegang tot gegevens van de database<br>
+Het beschermt je tegen veel ongewenste acties.
 
 ### Crud Tutorial:
 

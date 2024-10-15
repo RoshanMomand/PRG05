@@ -1,4 +1,4 @@
-@props(['active'=>false])
+@props(['active'])
 {{-- Props houdt in dat je bepaalde attributes uit kan sluiten die je NIET WILT--}}
-<a {{$attributes}} class="{{ $active ? 'active': "noActive" }}">{{$slot}}</a>
+<a {{$attributes}} >{{$slot}}</a>
 

@@ -3,7 +3,6 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Blog;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::resource('blogposts', BlogController::class);
 Route::get('/', [HomePageController::class, 'index'])->name('homepage');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.us');
-Route::post('/form-request', [FormController::class, 'formRequest'])->name('form.request');
 
 
 Route::get('/dashboard', function () {
