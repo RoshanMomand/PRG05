@@ -58,4 +58,10 @@ In plaats van meerdere Routes te hebben wordt het gecombineerd tot 1 geheel en h
 * Voor de rest een goeie ERD
 * Status kolom toevoegen aan Blogs - Publish / Unpublish
 
+## 15-10-2024
 
+* HTML Form gehardcoded
+
+### Crud Tutorial:
+
+* [Crud Tutorial & Nog veel meer](https://www.youtube.com/watch?v=cDEVWbz2PpQ&ab_channel=LearnWebCode)
