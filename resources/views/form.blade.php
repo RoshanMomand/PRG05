@@ -1,22 +1,12 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <x-layout>
     <form class="my-40 mx-40 flex flex-col items-center gap-y-3 border-4 border-black"
-          action="{{ route('blogposts.store') }}" method="POST">
+          action="{{ route('blogposts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        {{--
-        CSRF MOETTTT
-         https://laravel.com/docs/11.x/csrf //  Cross site request frogeries. Beschermt tegen SQL injecties van 3e partijen.
-         In plaats van bij elke input veld dit in te voeren kan je dit in de form stoppen en wordt alles beschermd
-         --}}
+
         <div class="flex flex-col">
             <label for="title">Title:</label>
-            <select id="title" name="title">
-                <option value="">Kies een titel</option>
-                <option value="mr">De heer</option>
-                <option value="mrs">Mevrouw</option>
-                <option value="miss">Juffrouw</option>
-                <option value="dr">Dokter</option>
-            </select>
+            <input type="text" id="title" name="title">
         </div>
 
         <div class="flex flex-col">
@@ -25,8 +15,8 @@
         </div>
 
         <div class="flex flex-col">
-            <label for="image_link">Image:</label>
-            <input type="file" id="image_link" name="image_link">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image">
         </div>
 
         <div class="flex flex-col">

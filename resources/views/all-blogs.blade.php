@@ -1,15 +1,11 @@
 <x-layout>
-    <h1>All blogs</h1>
-    <main>
-        <section>
+    <x-main-layout>
+        <h1 class="text-center text-4xl">{{ __('All Blogs') }}</h1>
+        <section class="grid-cols-4 grid gap-2 mx-2 my-4">
             @foreach($allBlogs as $blog)
                 <x-article-layout :blog="$blog">
                 </x-article-layout>
             @endforeach
-            <div class="flex content-evenly justify-center p-4 mt-4  m-auto border-2 border-black w-1/4">
-                <x-nav.navbarlink href="{{route('blogposts.create')}}" class="align-middle">Add new Blog
-                </x-nav.navbarlink>
-            </div>
         </section>
-    </main>
+    </x-main-layout>
 </x-layout>

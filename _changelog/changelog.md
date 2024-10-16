@@ -76,3 +76,16 @@ Het beschermt je tegen veel ongewenste acties.
 ### Crud Tutorial:
 
 * [Crud Tutorial & Nog veel meer](https://www.youtube.com/watch?v=cDEVWbz2PpQ&ab_channel=LearnWebCode)
+
+## 16-10-2024
+
+* Delete functionaliteit toegevoegd
+* Laravel tutorial herlopen
+* Images vanuit de public folder toegevoegd:
+    * [Link voor het images toe kunnen voegen](https://stackoverflow.com/questions/36441679/how-do-i-add-images-in-laravel-view)
+    * [Documentatie voor het images toevoegen op je storate](https://laravel.com/docs/10.x/filesystem)
+* image_link type naar blob veranderd
+* Layouts maken voor dashboard als gebruiker is ingelogd dat je of een anchor of een button tag hebt
+
+
+

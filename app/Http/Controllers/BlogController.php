@@ -30,27 +30,50 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $formFields = $request->validate([
+
+
+//        $formFields['title'] = strip_tags($formFields['title']);
+//        $formFields['description'] = strip_tags($formFields['description']);
+//        $formFields['image_link'] = strip_tags($formFields['image_link']);
+//        $formFields['status'] = strip_tags($formFields['status']);
+//        Blog::create($formFields);
+
+
+        // $product->user_id = auth()->user()->id
+
+
+        $blog = new Blog();
+        $blog->title = $request->input('title');
+        $blog->user_id = auth()->user()->id;
+        $blog->description = $request->input('description');
+
+        $file = $request->file('image');
+        $orginalName = $file->getClientOriginalName();
+        $path = $file->storeAs('images', $orginalName, 'public');
+        $blog->image = $path;
+
+        $blog->status = $request->input('status');
+
+
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image_link' => 'required',
+            'image' => 'required',
             'status' => 'required'
         ]);
-        $formFields['title'] = strip_tags($formFields['title']);
-        $formFields['description'] = strip_tags($formFields['description']);
-        $formFields['image_link'] = strip_tags($formFields['image_link']);
-        $formFields['status'] = strip_tags($formFields['status']);
 
-        Blog::create($formFields);
-        return redirect('/blogposts');
+
+        $blog->save();
+        return redirect()->route('blogposts.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blog $id)
+    public function show(Blog $blogpost)
     {
-        return view('single-blog', compact('id'));
+
+        return view('single-blog', compact('blogpost'));
     }
 
     /**
@@ -72,8 +95,10 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogController $blogHandlerController)
+    public function destroy(Blog $blogpost)
     {
-        //
+
+        $blogpost->delete();
+        return redirect()->route('blogposts.index');
     }
 }

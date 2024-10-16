@@ -7,9 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="dark:bg-gray-600">
 <x-nav.navbar></x-nav.navbar>
 {{$slot}}
-<x-footer.footer></x-footer.footer>
 </body>
 </html>
