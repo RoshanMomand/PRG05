@@ -1,4 +1,7 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+@dump($genreValues)
+
+
 <x-layout>
     <form class="my-40 mx-40 flex flex-col items-center gap-y-3 border-4 border-black"
           action="{{ route('blogposts.store') }}" method="post" enctype="multipart/form-data">
@@ -19,6 +22,15 @@
             <input type="file" id="image" name="image">
         </div>
 
+        <div>
+            <label for="genre">Genre:</label>
+            <select id="genre" name="name">
+                <option value="" disabled>Choose a Genre</option>
+                @foreach($genreValues as $genreValue)
+                    <option value="{{$genreValue->name}}" name="name">{{$genreValue->name}}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="flex flex-col">
             <label for="status">Status:</label>
             <select id="status" name="status">

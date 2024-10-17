@@ -87,5 +87,11 @@ Het beschermt je tegen veel ongewenste acties.
 * image_link type naar blob veranderd
 * Layouts maken voor dashboard als gebruiker is ingelogd dat je of een anchor of een button tag hebt
 
+## 17-10-2024
 
+* Genres tabel & blog_genre tussen tabel
+* Gebruik maken seeders & factory gemaakt met de genre tabel
+* [Factory & Seeders](https://www.youtube.com/watch?v=69YoTKzcTSg&ab_channel=CodewithBurt)
+* Single Blog Post genre Weergeven
+* Update Functionaliteit toevoegen
 

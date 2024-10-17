@@ -1,13 +1,12 @@
 @props(['blog'])
 
-<article class="flex flex-col border-4 gap-2">
-
-    <img src="{{ asset('storage/' . $blog->image) }}" alt="test">{{-- Haal de afbeelding path op uit de database --}}
-    <h2>{{$blog->title}}</h2> {{-- Haal de gegevens op uit de database van het boek--}}
-    <h5>{{$blog->description}}</h5> {{-- Haal de gegevens op uit de database van het boek--}}
-    <x-nav.navbarlink href="{{route('blogposts.show',$blog->id)}}">
-        Ga naar Blog
-        <br>{{$blog->title}}
+<article class=" flex  flex-col justify-evenly items-center gap-5">
+    <img class="w-3/4 h" src="{{ asset('storage/'.$blog->image) }}"
+         alt="test">
+    <h2 class="m-0 p-0">{{$blog->title}}</h2>
+    <h5 class="m-0">{{$blog->description}}</h5>
+    <x-nav.navbarlink class="m-0" href="{{route('blogposts.show',$blog->id)}}">
+        Ga naar Blog {{$blog->title}}
 
     </x-nav.navbarlink>
     <form action="{{ route('blogposts.destroy', $blog -> id) }}" method="POST">
