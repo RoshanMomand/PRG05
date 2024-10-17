@@ -45,7 +45,7 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
-
+//        $blog->genres = $request->input('name');
         $file = $request->file('image');
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
