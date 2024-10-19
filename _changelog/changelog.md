@@ -93,5 +93,17 @@ Het beschermt je tegen veel ongewenste acties.
 * Gebruik maken seeders & factory gemaakt met de genre tabel
 * [Factory & Seeders](https://www.youtube.com/watch?v=69YoTKzcTSg&ab_channel=CodewithBurt)
 * Single Blog Post genre Weergeven
-* Update Functionaliteit toevoegen
 
+## 18-10-2024
+
+* My blogs op de profiel laten zien
+    * En kunnen verwijderen
+
+## 19-10-2024
+
+* Update pagina creeren
+    * Hardcode
+    * Dynamisch maken
+    * Gegevens laden
+    * Post verzoek
+* Blog->genres in de post verzoek verwerken

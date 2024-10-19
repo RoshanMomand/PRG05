@@ -1,7 +1,7 @@
 @props(['blog'])
 
 <article class=" flex  flex-col justify-evenly items-center gap-5">
-    <img class="w-3/4 h" src="{{ asset('storage/'.$blog->image) }}"
+    <img class="w-3/4 " src="{{ asset('storage/'.$blog->image) }}"
          alt="test">
     <h2 class="m-0 p-0">{{$blog->title}}</h2>
     <h5 class="m-0">{{$blog->description}}</h5>

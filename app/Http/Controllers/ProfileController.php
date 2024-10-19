@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Blog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $userBlogs = Blog::where('user_id', auth()->id())->get();
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'userBlogs' => $userBlogs
         ]);
     }
 
@@ -57,4 +61,13 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function deleteBlog($deleteBlog)
+    {
+        $deleteBlog = Blog::find($deleteBlog);
+        $deleteBlog->delete();
+        return redirect()->route('profile.edit');
+    }
+
+
 }
