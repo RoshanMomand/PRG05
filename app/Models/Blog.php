@@ -12,7 +12,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'image', 'status', 'name'];
+    protected $fillable = ['title', 'description', 'image', 'status'];
 
     public function genres(): BelongsToMany
     {

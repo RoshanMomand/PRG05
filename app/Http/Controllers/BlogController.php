@@ -40,10 +40,14 @@ class BlogController extends Controller
 //        Blog::create($formFields);
         // $product->user_id = auth()->user()->id
         $blog = new Blog();
+
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
-        $blog->genres = request('name');
+
+//        $blog->genres()->attach($blog->id, ['genre_id']);
+
+
         $file = $request->file('image');
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
@@ -57,6 +61,7 @@ class BlogController extends Controller
             'description' => 'required',
             'image' => 'required',
             'status' => 'required',
+            'name' => 'required'
         ]);
 
 
