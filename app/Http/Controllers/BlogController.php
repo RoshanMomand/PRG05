@@ -14,8 +14,6 @@ class BlogController extends Controller
     public function index()
     {
         $allBlogs = Blog::all();
-
-
         return view('all-blogs', compact('allBlogs'));
 
     }
@@ -23,11 +21,11 @@ class BlogController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Blog $blogpost)
     {
-        //
+
         $genreValues = Genre::all();
-        return view('form', compact('genreValues'));
+        return view('create-blog-form', compact('genreValues'));
     }
 
     /**
@@ -45,7 +43,7 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
-//        $blog->genres = $request->input('name');
+        $blog->genres = request('name');
         $file = $request->file('image');
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
@@ -71,25 +69,48 @@ class BlogController extends Controller
      */
     public function show(Blog $blogpost)
     {
-
-
         return view('single-blog', compact('blogpost'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BlogController $blogHandlerController)
+    public function edit(Blog $blogpost)
     {
-        //
+
+        $genreValues = Genre::all();
+        if (isset(auth()->user()->id) && $blogpost->user_id === auth()->user()->id) {
+            return view('edit-blog-form', compact('blogpost', 'genreValues'));
+        } else {
+            return view('all-blogs');
+        }
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BlogController $blogHandlerController)
+    public function update(Request $request, Blog $blogpost)
     {
-        //
+        $blogpost->title = $request->input('title');
+        $blogpost->user_id = auth()->user()->id;
+        $blogpost->description = $request->input('description');
+//        $blog->genres = $request->input('name');
+        $file = $request->file('image');
+        $orginalName = $file->getClientOriginalName();
+        $path = $file->storeAs('images', $orginalName, 'public');
+        $blogpost->image = $path;
+        $blogpost->status = $request->input('status');
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'status' => 'required',
+        ]);
+
+        $blogpost->update();
+        return redirect()->route('blogposts.index');
     }
 
     /**

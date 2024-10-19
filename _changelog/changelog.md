@@ -101,9 +101,6 @@ Het beschermt je tegen veel ongewenste acties.
 
 ## 19-10-2024
 
-* Update pagina creeren
-    * Hardcode
-    * Dynamisch maken
-    * Gegevens laden
-    * Post verzoek
+* Update pagina functioneel maken
 * Blog->genres in de post verzoek verwerken
+* Edit & Delete alleen laten zien als de user die is ingelogd & bestaat 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -11,7 +12,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'image', 'status'];
+    protected $fillable = ['title', 'description', 'image', 'status', 'name'];
 
     public function genres(): BelongsToMany
     {
@@ -19,5 +20,9 @@ class Blog extends Model
 
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
