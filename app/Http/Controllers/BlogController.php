@@ -31,7 +31,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Blog $blog)
     {
 //        $formFields['title'] = strip_tags($formFields['title']);
 //        $formFields['description'] = strip_tags($formFields['description']);
@@ -39,34 +39,30 @@ class BlogController extends Controller
 //        $formFields['status'] = strip_tags($formFields['status']);
 //        Blog::create($formFields);
         // $product->user_id = auth()->user()->id
-        $blog = new Blog();
-
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
-
-//        $blog->genres()->attach($blog->id, ['genre_id']);
-
+        $blog->status = $request->input('status');
 
         $file = $request->file('image');
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
         $blog->image = $path;
-
-        $blog->status = $request->input('status');
-
-
         $request->validate([
             'title' => 'required',
             'description' => 'required',
             'image' => 'required',
             'status' => 'required',
-            'name' => 'required'
+            'genres' => 'required'
         ]);
 
-
         $blog->save();
+        
+        $genres = $request->input('genres');
+        $blog->genres()->attach($genres);
+
         return redirect()->route('blogposts.index');
+
     }
 
     /**
@@ -97,24 +93,33 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blogpost)
     {
-        $blogpost->title = $request->input('title');
-        $blogpost->user_id = auth()->user()->id;
-        $blogpost->description = $request->input('description');
-//        $blog->genres = $request->input('name');
-        $file = $request->file('image');
-        $orginalName = $file->getClientOriginalName();
-        $path = $file->storeAs('images', $orginalName, 'public');
-        $blogpost->image = $path;
-        $blogpost->status = $request->input('status');
-
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required',
             'status' => 'required',
+            'genres' => 'required'
         ]);
 
+        $blogpost->title = $request->input('title');
+        $blogpost->user_id = auth()->user()->id;
+        $blogpost->description = $request->input('description');
+        $file = $request->file('image');
+
+        if (isset($file)) {
+            $orginalName = $file->getClientOriginalName();
+            $path = $file->storeAs('images', $orginalName, 'public');
+            $blogpost->image = $path;
+        }
+
+
+        $blogpost->status = $request->input('status');
+
+
         $blogpost->update();
+
+        $genreUpdate = $request->input('genres');
+        $blogpost->genres()->sync($genreUpdate);
+
         return redirect()->route('blogposts.index');
     }
 

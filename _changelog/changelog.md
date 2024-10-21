@@ -103,4 +103,11 @@ Het beschermt je tegen veel ongewenste acties.
 
 * Update pagina functioneel maken
 * Blog->genres in de post verzoek verwerken
-* Edit & Delete alleen laten zien als de user die is ingelogd & bestaat 
+* Edit & Delete alleen laten zien als de user die is ingelogd & bestaat
+
+## 21-10-2024
+
+* blog & genre id koppelen met de koppel tabel in de create form
+* Genres kunnen update in de form
+
+

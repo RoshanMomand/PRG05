@@ -1,6 +1,6 @@
 <?php
 $singleBlog = $blogpost;
-@dump($singleBlog->genres());
+@dump($singleBlog->genres);
 ?>
 <x-layout>
     <x-main-layout>

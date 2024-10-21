@@ -7,22 +7,22 @@
 
         <div class="flex flex-col">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" value="{{old('title')}}">
         </div>
 
         <div class="flex flex-col">
             <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description">{{old('description')}}</textarea>
         </div>
 
         <div class="flex flex-col">
             <label for="image">Image:</label>
-            <input type="file" id="image" name="image">
+            <input type="file" id="image" name="image" value="{{old('image')}}">
         </div>
 
         <div>
             <label for="genre">Genre:</label>
-            <select id="genre" name="name">
+            <select id="genre" name="genres[]" multiple>
                 @foreach($genreValues as $genreValue)
                     <option value="{{$genreValue->id}}">{{$genreValue->name}}</option>
                 @endforeach

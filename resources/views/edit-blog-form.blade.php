@@ -22,13 +22,21 @@
         </div>
 
         <div>
-            {{--                    <label for="genre">Genre:</label>--}}
-            {{--                    <select id="genre" name="name">--}}
-            {{--                        <option disabled>Choose a Genre</option>--}}
-            {{--                        @foreach($genreValues as $genreValue)--}}
-            {{--                            <option value="{{$genreValue->name}}" name="name">{{$genreValue->name}}</option>--}}
-            {{--                        @endforeach--}}
-            {{--                    </select>--}}
+            <ul>Dit zijn je huidige genres
+                @if(!empty($blogpost->genres->name))
+                    <li>Pick a genre please</li>
+                @else
+                    @foreach($blogpost->genres as $genre)
+                        <li>{{$genre->name}}</li>
+                    @endforeach
+                @endif
+            </ul>
+            <label for="genre">Genre:</label>
+            <select id="genre" name="genres[]" multiple>
+                @foreach($genreValues as $genreValue)
+                    <option value="{{$genreValue->id}}" name="name">{{$genreValue->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="flex flex-col">
             <label for="status">Status:</label>
