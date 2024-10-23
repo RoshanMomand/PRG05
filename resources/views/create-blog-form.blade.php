@@ -17,7 +17,7 @@
 
         <div class="flex flex-col">
             <label for="image">Image:</label>
-            <input type="file" id="image" name="image" value="{{old('image')}}">
+            <input type="file" id="image" name="image">
         </div>
 
         <div>

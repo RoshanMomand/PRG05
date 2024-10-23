@@ -3,12 +3,14 @@
         <h1 class="text-center text-4xl">{{ __('All Blogs') }}</h1>
         <form action="{{route('blogposts.search')}}" method="get">
 
-            <label for="search">Find the genre you want</label>
-            <input type="search" id="search" name="search">
+            <div>
+                <label for="search-term">Find the genre you want</label>
+                <input type="text" id="search-term" name="search-term" value="{{  request('search-term') }}">
+            </div>
             <div>
                 {{--                <select id="genre" multiple>--}}
                 @foreach($allGenres as $genre)
-                    <input id="genre-{{$genre->id}}" type="checkbox" name="genres[]" value="{{$genre->id}}"> </input>
+                    <input id="genre-{{$genre->id}}" type="checkbox" name="genres[]" value="{{$genre->id}}">
                     <label for="genre-{{$genre->id}}">{{$genre->name}}</label>
                 @endforeach
                 {{--                </select>--}}

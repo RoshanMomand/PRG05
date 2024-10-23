@@ -121,7 +121,7 @@ Het beschermt je tegen veel ongewenste acties.
 
 * Admin role
     * Dashboard
-        * EVERYONES BLOG
-        * ALL GENRES
-        * ALL USERS
+        * USERS BLOG
+        * ALL GENRES -> Adding genres -> editing genres
+        * ALL USERS -> editing 
 

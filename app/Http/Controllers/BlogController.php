@@ -32,27 +32,23 @@ class BlogController extends Controller
     public function search(Request $request)
     {
 //
-        $search = $request->input('search');
+        $search = $request->input('search-term');
         $genreSearch = $request->input('genres');
         $query = Blog::query();
 
         if (isset($search)) {
-            $query->orWhereAny(['title', 'description'], 'LIKE', "%$search%");
-            $query->orWhereHas('genres', function ($searchQuery) use ($search) {
-                $searchQuery->whereAny(['name'], 'LIKE', "%$search%");
-            });
+            $query->WhereAny(['title', 'description'], 'LIKE', "%$search%");
         }
 
-
         if (isset($genreSearch)) {
-            $query->orWhereHas('genres', function ($genreQuery) use ($genreSearch) {
+            $query->WhereHas('genres', function ($genreQuery) use ($genreSearch) {
                 $genreQuery->where('id', $genreSearch);
             });
         }
 
         $allBlogs = $query->get();
         $allGenres = Genre::all();
-        return view('all-blogs', compact('allBlogs', 'allGenres'));
+        return view('all-blogs', compact('allBlogs', 'allGenres', 'request'));
     }
 
     /**
