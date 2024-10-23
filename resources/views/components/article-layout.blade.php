@@ -1,8 +1,9 @@
 @props(['blog'])
 
+
+
 @if(isset(auth()->user()->id) && $blog->user_id === auth()->user()->id)
     <article class=" flex  flex-col justify-evenly items-center gap-5">
-
         <img class="w-3/4 " src="{{ asset('storage/'.$blog->image) }}"
              alt="test">
         <h2 class="m-0 p-0">{{$blog->title}}</h2>

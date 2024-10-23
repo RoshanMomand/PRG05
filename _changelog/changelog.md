@@ -110,4 +110,18 @@ Het beschermt je tegen veel ongewenste acties.
 * blog & genre id koppelen met de koppel tabel in de create form
 * Genres kunnen update in de form
 
+## 22-10-2024
+
+* Zoek functie toevoegen
+    * Genre zoek functie toevoegen
+    * [Zoek functie tutorial](!https://www.youtube.com/watch?v=uEsd-5f-7KA&ab_channel=Bluebird) & [Documentatie]()
+* Filter functie toevoegen
+
+## 23-10-2024
+
+* Admin role
+    * Dashboard
+        * EVERYONES BLOG
+        * ALL GENRES
+        * ALL USERS
 

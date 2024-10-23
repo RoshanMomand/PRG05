@@ -14,7 +14,8 @@ class BlogController extends Controller
     public function index()
     {
         $allBlogs = Blog::all();
-        return view('all-blogs', compact('allBlogs'));
+        $allGenres = Genre::all();
+        return view('all-blogs', compact('allBlogs', 'allGenres'));
 
     }
 
@@ -28,6 +29,32 @@ class BlogController extends Controller
         return view('create-blog-form', compact('genreValues'));
     }
 
+    public function search(Request $request)
+    {
+//
+        $search = $request->input('search');
+        $genreSearch = $request->input('genres');
+        $query = Blog::query();
+
+        if (isset($search)) {
+            $query->orWhereAny(['title', 'description'], 'LIKE', "%$search%");
+            $query->orWhereHas('genres', function ($searchQuery) use ($search) {
+                $searchQuery->whereAny(['name'], 'LIKE', "%$search%");
+            });
+        }
+
+
+        if (isset($genreSearch)) {
+            $query->orWhereHas('genres', function ($genreQuery) use ($genreSearch) {
+                $genreQuery->where('id', $genreSearch);
+            });
+        }
+
+        $allBlogs = $query->get();
+        $allGenres = Genre::all();
+        return view('all-blogs', compact('allBlogs', 'allGenres'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -39,6 +66,13 @@ class BlogController extends Controller
 //        $formFields['status'] = strip_tags($formFields['status']);
 //        Blog::create($formFields);
         // $product->user_id = auth()->user()->id
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'status' => 'required',
+            'genres' => 'required'
+        ]);
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
@@ -48,16 +82,11 @@ class BlogController extends Controller
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
         $blog->image = $path;
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'status' => 'required',
-            'genres' => 'required'
-        ]);
+
 
         $blog->save();
-        
+
+
         $genres = $request->input('genres');
         $blog->genres()->attach($genres);
 
