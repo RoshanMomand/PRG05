@@ -2,16 +2,23 @@
 
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\isAdmin;
 
 Route::resource('blogposts', BlogController::class);
+Route::middleware(isAdmin::class)->group(function () {
+    Route::resource('admin', AdminController::class);
+    Route::get('/all-blogs-overview', [AdminController::class, 'allBlogsIndex'])->name('admin.all.blogs.overview');
+    Route::get('/all-genres-overview', [AdminController::class, 'allGenresIndex'])->name('admin.all.genres.overview');
+    Route::get('/all-users-overview', [AdminController::class, 'allUserIndex'])->name('admin.all.users.overview');
+});
 Route::get('/', [HomePageController::class, 'index'])->name('homepage');
 Route::get('/search', [BlogController::class, 'search'])->name('blogposts.search');
+
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.us');
 

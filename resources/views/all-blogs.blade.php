@@ -10,7 +10,8 @@
             <div>
                 {{--                <select id="genre" multiple>--}}
                 @foreach($allGenres as $genre)
-                    <input id="genre-{{$genre->id}}" type="checkbox" name="genres[]" value="{{$genre->id}}">
+                    <input id="genre-{{$genre->id}}" type="checkbox" name="genres[]"
+                           value="{{$genre->id}}" {{ in_array($genre->id, request('genres', [])) ? 'checked' : '' }}>
                     <label for="genre-{{$genre->id}}">{{$genre->name}}</label>
                 @endforeach
                 {{--                </select>--}}

@@ -66,14 +66,11 @@ class BlogController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'required',
-            'status' => 'required',
             'genres' => 'required'
         ]);
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
-        $blog->status = $request->input('status');
-
         $file = $request->file('image');
         $orginalName = $file->getClientOriginalName();
         $path = $file->storeAs('images', $orginalName, 'public');
@@ -121,15 +118,13 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'status' => 'required',
-            'genres' => 'required'
+            'genres' => 'required|array'
         ]);
 
         $blogpost->title = $request->input('title');
         $blogpost->user_id = auth()->user()->id;
         $blogpost->description = $request->input('description');
         $file = $request->file('image');
-
         if (isset($file)) {
             $orginalName = $file->getClientOriginalName();
             $path = $file->storeAs('images', $orginalName, 'public');

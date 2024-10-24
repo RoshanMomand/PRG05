@@ -123,5 +123,19 @@ Het beschermt je tegen veel ongewenste acties.
     * Dashboard
         * USERS BLOG
         * ALL GENRES -> Adding genres -> editing genres
-        * ALL USERS -> editing 
+        * ALL USERS -> editing
 
+## 24-10-2024
+
+* Admin Dashboard afmaken zie dag 23-10-2024
+    * Admin autorisatie toegevoegd
+        * [Documentatie voor Middleware](https://laravel.com/docs/11.x/middleware#main-content)
+    * Blogs data ophalen in de vorm van rijen
+    * Genres data ophalen in de vorm van rijen
+        * Nieuwe genres kunnen toevoegen
+        * Genres kunnen editen
+        * Genres kunnen verwijderen
+    * Users data ophalen in de vorm van rijen
+        * Users kunnen verwijderen
+* Checkbox oude value weergeven
+    * [Stackoverflow om oude checkbox te weergeven](https://stackoverflow.com/questions/39521726/how-to-show-old-data-of-dynamic-checkbox-in-laravel)
