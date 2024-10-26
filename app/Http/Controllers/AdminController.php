@@ -67,6 +67,7 @@ class AdminController extends Controller
     {
         $genreValues = Genre::all();
         // edit pagina maken voor admin
+        
     }
 
     /**
