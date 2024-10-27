@@ -62,11 +62,10 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function deleteBlog($deleteBlog)
+    public function deleteBlog(Blog $deleteBlog)
     {
-        $deleteBlog = Blog::find($deleteBlog);
         $deleteBlog->delete();
-        return redirect()->route('profile.edit');
+        return redirect()->route('profile.edit', compact('deleteBlog'));
     }
 
 

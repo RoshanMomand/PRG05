@@ -9,17 +9,20 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 
-Route::resource('blogposts', BlogController::class);
+
 Route::middleware(isAdmin::class)->group(function () {
     Route::resource('admin', AdminController::class);
     Route::get('/all-blogs-overview', [AdminController::class, 'allBlogsIndex'])->name('admin.all.blogs.overview');
     Route::get('/all-genres-overview', [AdminController::class, 'allGenresIndex'])->name('admin.all.genres.overview');
     Route::get('/all-users-overview', [AdminController::class, 'allUserIndex'])->name('admin.all.users.overview');
+    Route::get('/genre/create', [AdminController::class, 'createNewGenre'])->name('admin.create.genre');
+    Route::post('/all-genres-overview', [AdminController::class, 'storeNewGenre'])->name('admin.store.new.genre');
+    Route::get('/genre/{admin}', [AdminController::class, 'deleteGenre'])->name('admin.delete.genre');
+
 });
+Route::resource('blogposts', BlogController::class);
 Route::get('/', [HomePageController::class, 'index'])->name('homepage');
 Route::get('/search', [BlogController::class, 'search'])->name('blogposts.search');
-
-
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.us');
 
 

@@ -60,6 +60,12 @@
                                         <td>{{$blog->user->name}}</td>
                                         <td>{{$blog->created_at}}</td>
                                         <td>{{$blog->updated_at}}</td>
+                                        <td>{{$blog->updated_at}}</td>
+                                        <td>{{$blog->updated_at}}</td>
+                                        <td>
+                                            <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                                               href="{{route('admin.show',$blog->id)}}"> Bekijk details</a>
+                                        </td>
                                         <td>
                                             <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
                                                href="{{route('admin.edit',$blog->id)}}">

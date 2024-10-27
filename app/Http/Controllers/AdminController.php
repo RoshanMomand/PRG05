@@ -44,30 +44,53 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function createNewGenre()
     {
-        //
+        return view('admin.create-genre-form');
+    }
+
+    // Retrieve the data that is send through the create new genre form
+    public function storeNewGenre(Request $request, Genre $admin)
+    {
+        $genre = $admin;
+
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $genre->name = $request->input('name');
+        $genre->save();
+        return redirect()->route('admin.all.genres.overview');
+    }
+
+    /**
+     * Delete the genre
+     */
+
+    public function deleteGenre(Genre $admin)
+    {
+        $genre = $admin;
+        $genre->delete();
+        return redirect()->route('admin.all.genres.overview');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $admin)
     {
-        //
+        $singleBlog = $admin;
+        return view('single-blog', compact('singleBlog'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blog $blog)
+    public function edit(Blog $admin)
     {
         $genreValues = Genre::all();
         // edit pagina maken voor admin
-        
+        return view('admin.admin-edit', compact('genreValues', 'admin'));
+
     }
 
     /**
@@ -92,8 +115,6 @@ class AdminController extends Controller
             $path = $file->storeAs('images', $orginalName, 'public');
             $admin->image = $path;
         }
-
-
         $admin->status = $request->input('status');
 
 

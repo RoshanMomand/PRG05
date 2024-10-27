@@ -1,7 +1,7 @@
 <x-layout>
     <div class="bg-white shadow rounded-lg">
         <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Books Blogs overview</h3>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">All Users overview</h3>
             <div class="flex items-center justify-end gap-3 mt-4">
                 <div>
                     <a class="bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5 "
@@ -64,8 +64,10 @@
                                         <td>{{$user->role}}</td>
                                         <td>{{$user->created_at}}</td>
                                         <td>{{$user->updated_at}}</td>
-                                        <td>a</td>
+                                        {{--                                        <td>--}}
+                                        {{--                                            <form action="p"></form>--}}
 
+                                        {{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

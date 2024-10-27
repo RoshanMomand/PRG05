@@ -139,3 +139,20 @@ Het beschermt je tegen veel ongewenste acties.
         * Users kunnen verwijderen
 * Checkbox oude value weergeven
     * [Stackoverflow om oude checkbox te weergeven](https://stackoverflow.com/questions/39521726/how-to-show-old-data-of-dynamic-checkbox-in-laravel)
+
+## 27-10-2024
+
+* Edit form aanmaken voor admin
+* Update functionaliteit toevoegen voor de admin
+* Nieuwe Genre Kunnen toevoegen.
+* Genre kunnen verwijderen.
+* Blogs weergeven op profiel, bekijken, editen en verwijderen
+
+## 28-10-2024
+
+* Efficientere manier toepassen
+* Security OWASP
+    * Data veilig in de formulier zetten
+    * Data goed verwerken na de postg
+    * Concretere validatie toevoegen
+* Blogs Publishen en Unpublishen

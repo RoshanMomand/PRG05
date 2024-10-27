@@ -1,36 +1,25 @@
 @props(['blog'])
-
-
-
-@if(isset(auth()->user()->id) && $blog->user_id === auth()->user()->id)
-    <article class=" flex  flex-col justify-evenly items-center gap-5">
-        <img class="w-3/4 " src="{{ asset('storage/'.$blog->image) }}"
-             alt="test">
-        <h2 class="m-0 p-0">{{$blog->title}}</h2>
-        <h5 class="m-0">{{$blog->description}}</h5>
-        <x-nav.navbarlink class="m-0" href="{{route('blogposts.show',$blog->id)}}">
-            Ga naar Blog {{$blog->title}}
-
-        </x-nav.navbarlink>
+<article class=" flex  flex-col justify-evenly  gap-5">
+    <img class="w-2/3 h-3/6 object-cover object-top rounded-full" src="{{ asset('storage/'.$blog->image) }}" alt="test">
+    <h2 class="m-0 p-0">{{$blog->title}}</h2>
+    <h5 class="m-0">{{$blog->description}}</h5>
+    <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+       href="{{route('blogposts.show',$blog->id)}}">Ga naar Blog</a>
+    @if(isset(auth()->user()->id) && $blog->user_id === auth()->user()->id)
         <form action="{{ route('blogposts.destroy', $blog -> id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit">Delete</button>
+            <button
+                class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                type="submit">Delete
+            </button>
         </form>
-        <x-nav.navbarlink href="{{route('blogposts.edit',$blog->id)}}">
+        <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+           href="{{route('blogposts.edit',$blog->id)}}">
             Edit this post
-        </x-nav.navbarlink>
-    </article>
-@else
-    <article class=" flex  flex-col justify-evenly items-center gap-5">
+        </a>
+    @endif
+</article>
 
-        <img class="w-3/4 " src="{{ asset('storage/'.$blog->image) }}" alt="test">
-        <h2 class="m-0 p-0">{{$blog->title}}</h2>
-        <h5 class="m-0">{{$blog->description}}</h5>
-        <x-nav.navbarlink class="m-0" href="{{route('blogposts.show',$blog->id)}}">Ga naar Blog {{$blog->title}}
-        </x-nav.navbarlink>
 
-    </article>
-
-@endif
 

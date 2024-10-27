@@ -92,7 +92,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blogpost)
     {
-        return view('single-blog', compact('blogpost'));
+        $singleBlog = $blogpost;
+        return view('single-blog', compact('singleBlog'));
     }
 
     /**

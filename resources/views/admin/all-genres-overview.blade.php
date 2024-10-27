@@ -2,7 +2,7 @@
 
     <div class="bg-white shadow rounded-lg">
         <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Books Blogs overview</h3>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">All Genre overview</h3>
             <div class="flex items-center justify-end gap-3 mt-4">
                 <div>
                     <a class="bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5 "
@@ -10,9 +10,9 @@
                         pagina</a>
                 </div>
                 <div>
-                    <a href="#"
+                    <a href="{{route('admin.create.genre')}}"
                        class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5">Add
-                        new</a>
+                        new Genre</a>
                 </div>
             </div>
             <div class="mt-5 flex flex-col">
@@ -39,7 +39,7 @@
                                         Updated
                                     </th>
                                     <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+                                        <span class="sr-only">EDIT</span>
                                     </th>
                                 </tr>
                                 </thead>
@@ -50,6 +50,17 @@
                                         <td>{{$genre->name}}</td>
                                         <td>{{$genre->created_at}}</td>
                                         <td>{{$genre->updated_at}}</td>
+                                        <td>
+                                            <form action="{{route('admin.delete.genre',$genre->id)}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                                                    type="submit">
+                                                    Delete this genre
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

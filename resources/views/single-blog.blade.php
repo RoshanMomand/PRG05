@@ -1,7 +1,3 @@
-<?php
-$singleBlog = $blogpost;
-@dump($singleBlog->genres);
-?>
 <x-layout>
     <x-main-layout>
         <article class="w-full flex  gap-x-32">
@@ -17,7 +13,16 @@ $singleBlog = $blogpost;
                 </div>
                 <h1>The article is written by {{$singleBlog->user->name}}</h1>
                 <div>
-                    <x-nav.navbarlink href="{{route('blogposts.index')}}">Ga terug naar alle blogs</x-nav.navbarlink>
+                    @if(auth()->user()->role === 'admin')
+                        <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                           href="{{route('admin.all.blogs.overview')}}">Ga terug naar all blogs overview
+                        </a>
+                    @else
+                        <a
+                            class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                            href="{{route('blogposts.index')}}">Ga terug naar alle blogs
+                        </a>
+                    @endif
                 </div>
             </div>
         </article>
