@@ -26,6 +26,8 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = Auth::user();
+        $user->increment('login_count');
         $request->session()->regenerate();
 
         return redirect()->intended(route('homepage', absolute: false));

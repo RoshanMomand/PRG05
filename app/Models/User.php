@@ -51,4 +51,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class, 'blog_id');
     }
+
 }

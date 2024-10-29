@@ -18,6 +18,7 @@ Route::middleware(isAdmin::class)->group(function () {
     Route::get('/genre/create', [AdminController::class, 'createNewGenre'])->name('admin.create.genre');
     Route::post('/all-genres-overview', [AdminController::class, 'storeNewGenre'])->name('admin.store.new.genre');
     Route::get('/genre/{admin}', [AdminController::class, 'deleteGenre'])->name('admin.delete.genre');
+    Route::post('/all-blogs-overview/{admin}', [AdminController::class, 'updateStatus'])->name('admin.update.status');
 
 });
 Route::resource('blogposts', BlogController::class);

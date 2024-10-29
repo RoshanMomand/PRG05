@@ -9,11 +9,6 @@
                        href="{{route('admin.index')}}">Terug naar de index
                         pagina</a>
                 </div>
-                <div>
-                    <a href="#"
-                       class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5">Add
-                        new</a>
-                </div>
             </div>
             <div class="mt-5 flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -56,11 +51,20 @@
                                     <tr>
                                         <td>{{$blog->id}}</td>
                                         <td>{{$blog->title}}</td>
-                                        <td>{{$blog->status}}</td>
+                                        <td>
+                                            <form action="{{route('admin.update.status',$blog->id)}}" method="POST">
+                                                @csrf
+                                                <input name="status" type="hidden"
+                                                       value="{{$blog->status === 1 ? 0 : 1 }}">
+                                                <button
+                                                    class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
+                                                    type="submit">
+                                                    {{$blog->status?'Unpublish Blog':'Publish Blog'}}
+                                                </button>
+                                            </form>
+                                        </td>
                                         <td>{{$blog->user->name}}</td>
                                         <td>{{$blog->created_at}}</td>
-                                        <td>{{$blog->updated_at}}</td>
-                                        <td>{{$blog->updated_at}}</td>
                                         <td>{{$blog->updated_at}}</td>
                                         <td>
                                             <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
@@ -81,6 +85,7 @@
                                                 </button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -125,6 +125,25 @@ class AdminController extends Controller
         return redirect()->route('admin.all.blogs.overview');
     }
 
+    public function updateStatus(Request $request, Blog $admin)
+    {
+
+        $blog = $admin;
+
+        $request->validate([
+            'status' => 'required|boolean',
+        ]);
+
+
+        // Update de status
+        $blog->status = $request->input('status');
+        $blog->save();
+
+        // Redirect terug naar de vorige pagina met een succesmelding
+        return redirect()->route('admin.all.blogs.overview');
+
+    }
+
     /**
      * Remove the specified resource from storage.
      */

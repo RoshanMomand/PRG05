@@ -13,7 +13,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $allBlogs = Blog::all();
+        $allBlogs = Blog::where('status', 1)->get();
         $allGenres = Genre::all();
         return view('all-blogs', compact('allBlogs', 'allGenres'));
 
@@ -24,7 +24,7 @@ class BlogController extends Controller
      */
     public function create(Blog $blogpost)
     {
-
+        
         $genreValues = Genre::all();
         return view('create-blog-form', compact('genreValues'));
     }

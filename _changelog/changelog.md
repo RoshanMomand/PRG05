@@ -148,11 +148,16 @@ Het beschermt je tegen veel ongewenste acties.
 * Genre kunnen verwijderen.
 * Blogs weergeven op profiel, bekijken, editen en verwijderen
 
-## 28-10-2024
+## 29-10-2024
 
-* Efficientere manier toepassen
-* Security OWASP
-    * Data veilig in de formulier zetten
-    * Data goed verwerken na de postg
-    * Concretere validatie toevoegen
 * Blogs Publishen en Unpublishen
+* Login_count gemaakt
+    * [Docs + Chatgpt(klein beetje hulp)](https://laravel.com/docs/11.x/session#regenerating-the-session-id)
+
+## 30-10-2024
+
+* Project Nalopen
+* Security OWASP + validatie systemen dubbelchecken
+    * Data veilig in de formulier zetten
+    * Data goed verwerken na de post
+    * Concretere validatie toevoegen
