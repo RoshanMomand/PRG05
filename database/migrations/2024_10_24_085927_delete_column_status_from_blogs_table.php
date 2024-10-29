@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->boolean('status')->default(true)->nullable();
+            $table->boolean('status')->default(1)->nullable();
         });
     }
 
