@@ -24,7 +24,7 @@ class BlogController extends Controller
      */
     public function create(Blog $blogpost)
     {
-        
+
         $genreValues = Genre::all();
         return view('create-blog-form', compact('genreValues'));
     }
@@ -106,7 +106,7 @@ class BlogController extends Controller
         if (isset(auth()->user()->id) && $blogpost->user_id === auth()->user()->id) {
             return view('edit-blog-form', compact('blogpost', 'genreValues'));
         } else {
-            return view('all-blogs');
+            return redirect()->route('blogposts.index');
         }
 
     }
