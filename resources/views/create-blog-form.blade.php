@@ -29,6 +29,15 @@
                     @endforeach
                 </select>
             </div>
+            @if ($errors->userCreateErrors->any())
+                <div class="alert alert-danger text-white text-2xl">
+                    <ul>
+                        @foreach ($errors->userCreateErrors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <button class="bg-black text-white hover:bg-gray-700 hover:text-black p-5" type="submit">Submit</button>
         </form>
     @else

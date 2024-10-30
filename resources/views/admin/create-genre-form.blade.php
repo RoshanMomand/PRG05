@@ -10,6 +10,15 @@
                         <input type="text" id="name" name="name"
                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
+                    @if ($errors->addingGenreForm->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->addingGenreForm->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="flex items-center justify-end gap-3 mt-4">
                         <div>
                             <a class="bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"

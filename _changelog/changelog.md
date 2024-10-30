@@ -121,7 +121,7 @@ Het beschermt je tegen veel ongewenste acties.
 
 * Admin role
     * Dashboard
-        * USERS BLOG
+        * ALL USERS BLOG
         * ALL GENRES -> Adding genres -> editing genres
         * ALL USERS -> editing
 
@@ -156,8 +156,10 @@ Het beschermt je tegen veel ongewenste acties.
 
 ## 30-10-2024
 
-* Project Nalopen
+* Project Na lopen
+    * Code netter en efficienter maken
+    * Styling van t project toepassen (optioneel)
+
 * Security OWASP + validatie systemen dubbelchecken
     * Data veilig in de formulier zetten
-    * Data goed verwerken na de post
     * Concretere validatie toevoegen

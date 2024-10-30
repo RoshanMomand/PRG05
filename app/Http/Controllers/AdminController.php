@@ -14,7 +14,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // return de view voor admin
         return view('admin.index');
     }
 
@@ -36,14 +35,6 @@ class AdminController extends Controller
         return view('admin.all-users-overview', compact('allUsers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     public function createNewGenre()
     {
         return view('admin.create-genre-form');
@@ -52,11 +43,16 @@ class AdminController extends Controller
     // Retrieve the data that is send through the create new genre form
     public function storeNewGenre(Request $request, Genre $admin)
     {
+        validator(
+            $request->all('name'),
+            ['name' => 'required | min:6 | max:20'],
+            [
+                'required' => 'Mate this field is required Yeah',
+                'min' => 'It has to be 6 letters long',
+                'max' => 'Ok listen up brev which genre is longer than 20 characters u lil shit'
+            ]
+        )->validateWithBag('addingGenreForm');
         $genre = $admin;
-
-        $request->validate([
-            'name' => 'required'
-        ]);
         $genre->name = $request->input('name');
         $genre->save();
         return redirect()->route('admin.all.genres.overview');
@@ -99,29 +95,44 @@ class AdminController extends Controller
     public function update(Request $request, Blog $admin)
     {
 
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'genres' => 'required|array'
-        ]);
+        validator(
+            $request->only(['title', 'description', 'genres']),
+            [
+                'title' => 'required|min:10 | max:255',
+                'description' => 'required | min:20 | max:255',
+                'genres' => 'required',
+                'image' => 'nullable'
+            ],
+            [
+                'title.required' => 'Oi! You need to provide a title, mate.',
+                'title.unique' => 'This title? It’s already taken, savvy?',
+                'title.min' => 'A title needs to be at least 10 characters long, capisce?',
+                'title.max' => 'Keep it under 255 characters, yeah?',
+                'description.required' => 'Listen up! Description is required, no excuses.',
+                'description.min' => 'You gotta give at least 20 characters for the description, understood?',
+                'description.max' => 'Don’t ramble on; keep it within 255 characters.',
+                'genres.required' => 'You must choose a genre from the list, got it?',
+            ],
+        )->validateWithBag('adminUpdateBlogs');
 
+        $blog = $admin;
 
-        $admin->title = $request->input('title');
-        $admin->user_id = auth()->user()->id;
-        $admin->description = $request->input('description');
+        $blog->title = $request->input('title');
+        $blog->user_id = auth()->user()->id;
+        $blog->description = $request->input('description');
         $file = $request->file('image');
         if (isset($file)) {
             $orginalName = $file->getClientOriginalName();
             $path = $file->storeAs('images', $orginalName, 'public');
-            $admin->image = $path;
+            $blog->image = $path;
         }
-        $admin->status = $request->input('status');
+        $blog->status = $request->input('status');
 
 
-        $admin->update();
+        $blog->update();
 
         $genreUpdate = $request->input('genres');
-        $admin->genres()->sync($genreUpdate);
+        $blog->genres()->sync($genreUpdate);
         return redirect()->route('admin.all.blogs.overview');
     }
 
@@ -130,9 +141,11 @@ class AdminController extends Controller
 
         $blog = $admin;
 
-        $request->validate([
-            'status' => 'required|boolean',
-        ]);
+
+        validator(
+            $request->only(['status']),
+            ['status' => ' required|boolean'],
+        )->validate();
 
 
         // Update de status

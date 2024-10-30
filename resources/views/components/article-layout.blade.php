@@ -5,7 +5,7 @@
     <h5 class="m-0">{{$blog->description}}</h5>
     <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
        href="{{route('blogposts.show',$blog->id)}}">Ga naar Blog</a>
-    @if(isset(auth()->user()->id) && $blog->user_id === auth()->user()->id)
+    @if(auth()->check() && ($blog->user_id === auth()->user()->id || auth()->user()->role === 'admin'))
         <form action="{{ route('blogposts.destroy', $blog -> id) }}" method="POST">
             @csrf
             @method('DELETE')

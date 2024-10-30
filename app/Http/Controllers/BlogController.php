@@ -62,12 +62,29 @@ class BlogController extends Controller
 //        $formFields['status'] = strip_tags($formFields['status']);
 //        Blog::create($formFields);
         // $product->user_id = auth()->user()->id
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'genres' => 'required'
-        ]);
+        validator(
+            $request->only(['title', 'description', 'image', 'genres']),
+            [
+                'title' => 'required|unique:blogs,title|min:10|max:255',
+                'description' => 'required|min:20|max:255',
+                'image' => 'required',
+                'genres' => 'required|min:1'
+            ],
+            [
+                'title.required' => 'Listen up! You can’t leave the title empty, that won’t fly!',
+                'title.unique' => 'That title’s been claimed already; find yourself a fresh one!',
+                'title.min' => 'A title needs a solid 10 characters, none of that short stuff!',
+                'title.max' => 'Keep that title under 255 characters, we’re not writing a novel here!',
+
+                'description.required' => 'Oi! A description is non-negotiable, don’t skip it!',
+                'description.min' => 'You’re gonna need at least 20 characters for that description, savvy?',
+                'description.max' => 'Keep it concise; 255 characters is the limit, got it?',
+
+                'image.required' => 'An image is a must, don’t leave that out, mate!',
+                'genres.required' => 'You gotta choose a genre, or we can’t proceed, understand?',
+                'genres.min' => 'At least one genre needs to be picked, capisce?',
+            ]
+        )->validateWithBag('userCreateErrors');
         $blog->title = $request->input('title');
         $blog->user_id = auth()->user()->id;
         $blog->description = $request->input('description');
@@ -103,7 +120,7 @@ class BlogController extends Controller
     {
 
         $genreValues = Genre::all();
-        if (isset(auth()->user()->id) && $blogpost->user_id === auth()->user()->id) {
+        if (auth()->check() && $blogpost->user_id === auth()->user()->id) {
             return view('edit-blog-form', compact('blogpost', 'genreValues'));
         } else {
             return redirect()->route('blogposts.index');
@@ -116,11 +133,26 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blogpost)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'genres' => 'required|array'
-        ]);
+        validator(
+            $request->only(['title', 'description', 'genres']),
+            [
+                'title' => 'required|min:10|max:255',
+                'description' => 'required|min:20|max:255',
+                'genres' => 'required|min:1'
+            ],
+            [
+                'title.required' => 'Oi! You need to provide a title, no slacking off!',
+                'title.min' => 'A title must be at least 10 characters long, understood?',
+                'title.max' => 'Keep that title under 255 characters, savvy?',
+
+                'description.required' => 'Listen up! A description is essential, don’t skip it.',
+                'description.min' => 'You gotta give at least 20 characters for the description, alright?',
+                'description.max' => 'Don’t ramble on; keep it within 255 characters, yeah?',
+
+                'genres.required' => 'You must pick a genre from the list; we need to know your flavor, right?',
+                'genres.min' => 'Pick at least one genre, capisce?',
+            ]
+        )->validateWithBag('userUpdateBlog');
 
         $blogpost->title = $request->input('title');
         $blogpost->user_id = auth()->user()->id;
@@ -131,9 +163,6 @@ class BlogController extends Controller
             $path = $file->storeAs('images', $orginalName, 'public');
             $blogpost->image = $path;
         }
-
-
-        $blogpost->status = $request->input('status');
 
 
         $blogpost->update();

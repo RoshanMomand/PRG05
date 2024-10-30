@@ -12,6 +12,8 @@ class Genre extends Model
 //    /** @use HasFactory<\Database\Factories\GenreFactory> */
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     protected $touches = ['blogs'];
 
     public function blogs(): BelongsToMany

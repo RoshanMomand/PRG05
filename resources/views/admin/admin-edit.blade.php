@@ -4,6 +4,7 @@
           action="{{ route('admin.update',$admin->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+
         <div class="flex flex-col">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" value="{{$admin->title}}">
@@ -38,8 +39,17 @@
                     </option>
                 @endforeach
             </select>
-        </div>
 
+        </div>
+        @if ($errors->adminUpdateBlogs->any())
+            <div class="alert alert-danger text-white text-2xl">
+                <ul>
+                    @foreach ($errors->adminUpdateBlogs->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <button class="bg-black text-white hover:bg-gray-700 hover:text-black p-5" type="submit">Submit</button>
     </form>
 </x-layout>
