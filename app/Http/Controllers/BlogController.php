@@ -26,10 +26,10 @@ class BlogController extends Controller
     public function create(Blog $blogpost)
     {
 
-        $userLogins = UserLogin::all()->where('user_id', auth()->user()->count());
 
         if (auth()->check()) {
             $genreValues = Genre::all();
+            $userLogins = UserLogin::where('user_id', auth()->id())->get();
             return view('create-blog-form', compact('genreValues', 'userLogins'));
         }
         return redirect('/');
