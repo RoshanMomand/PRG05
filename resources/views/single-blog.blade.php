@@ -13,7 +13,7 @@
                 </div>
                 <h1>The article is written by {{$singleBlog->user->name}}</h1>
                 <div>
-                    @if(auth()->user()->role === 'admin')
+                    @if(auth()->check() && auth()->user()->role === 'admin')
                         <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
                            href="{{route('admin.all.blogs.overview')}}">Ga terug naar all blogs overview
                         </a>

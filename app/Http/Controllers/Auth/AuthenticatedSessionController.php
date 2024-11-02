@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\UserLogin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,9 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $user = Auth::user();
-        $user->increment('login_count');
+        $user = new UserLogin();
+        $user->user_id = $request->user()->id;
+        $user->save();
         $request->session()->regenerate();
 
         return redirect()->intended(route('homepage', absolute: false));

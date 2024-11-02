@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Genre;
+use App\Models\UserLogin;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -25,8 +26,13 @@ class BlogController extends Controller
     public function create(Blog $blogpost)
     {
 
-        $genreValues = Genre::all();
-        return view('create-blog-form', compact('genreValues'));
+        $userLogins = UserLogin::all()->where('user_id', auth()->user()->count());
+
+        if (auth()->check()) {
+            $genreValues = Genre::all();
+            return view('create-blog-form', compact('genreValues', 'userLogins'));
+        }
+        return redirect('/');
     }
 
     public function search(Request $request)
@@ -48,7 +54,7 @@ class BlogController extends Controller
 
         $allBlogs = $query->get();
         $allGenres = Genre::all();
-        return view('all-blogs', compact('allBlogs', 'allGenres', 'request'));
+        return view('all-blogs', compact('allBlogs', 'allGenres'));
     }
 
     /**

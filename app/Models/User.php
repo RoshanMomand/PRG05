@@ -49,7 +49,12 @@ class User extends Authenticatable
 
     public function blogs(): HasMany
     {
-        return $this->hasMany(Blog::class, 'blog_id');
+        return $this->hasMany(Blog::class, 'user_id');
+    }
+
+    public function userLogins(): HasMany
+    {
+        return $this->hasMany(UserLogin::class, 'user_id');
     }
 
 }

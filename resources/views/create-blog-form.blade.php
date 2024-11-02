@@ -1,7 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@dump($genreValues)
 <x-layout>
-    @if(auth()->user()->login_count >= 3 || auth()->user()->role ==='admin')
+    @if($userLogins->count() >= 3 || auth()->user()->role ==='admin')
         <form class="my-40 mx-40 flex flex-col items-center gap-y-3 border-4 border-black"
               action="{{ route('blogposts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -43,7 +42,7 @@
     @else
         <div class=" flex flex-col gap-y-24 text-center text-2xl">
             <h1>Je moet eerst 3x ingelogd zijn</h1>
-            <h2>Je moet nog {{ 3 - auth()->user()->login_count }} keer inloggen om een blog te kunnen maken.</h2>
+            <h2>Je moet nog {{ 3 - $userLogins->count() }} keer inloggen om een blog te kunnen maken.</h2>
             <div>
                 <a class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white font-medium rounded-md px-4 py-2 sm:px-5 sm:py-2.5"
                    href="{{route('blogposts.index')}}"> Terug naar homepage</a>
